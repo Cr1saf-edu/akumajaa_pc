@@ -81,12 +81,6 @@ img {
   width: 100%;
 }
 
-.cropped {
-  width: 957px;
-  height: 327px;
-  overflow: hidden; 
-}
-
 .page {
   min-height: 1150px;
   font-size: 12px;
