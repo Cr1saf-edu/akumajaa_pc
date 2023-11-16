@@ -12,7 +12,7 @@ function nextPage() {
 		} else {
 			$(".page:first").addClass("active");
 		}
-	}, 200);
+	}, 400);
 }
 
 function prevPage() {
@@ -23,10 +23,21 @@ function prevPage() {
 
 	setTimeout(function () {
 		$(findPrev).addClass("active");
-	}, 200);
+	}, 400);
+}
+
+function startAutoTransition() {
+	autoTransitionInterval = setInterval(function () {
+		nextPage();
+	}, 5000);
+}
+
+function stopAutoTransition() {
+	clearInterval(autoTransitionInterval);
 }
 
 $('.js-next').on('click', function () {
+	stopAutoTransition();
 	nextPage();
 });
 
@@ -40,4 +51,40 @@ $('.js-back-to-1').on('click', function () {
 	setTimeout(function () {
 		$('.page-cover').addClass("active");
 	}, 400);
+});
+
+$('.js-auto-transition').on('click', function (e) {
+	e.preventDefault();
+	stopAutoTransition();
+	startAutoTransition();
+});
+
+$('.page').on('click', function() {
+    stopAutoTransition();
+});
+
+$(document).on("keydown", function (e) {
+	switch (e.which) {
+		case 37: // Izquierda
+			prevPage();
+			break;
+
+		case 39: // Derecha
+			stopAutoTransition();
+			nextPage();
+			break;
+
+		case 13: // Enter
+			startAutoTransition();
+			break;
+
+		case 27: // Esc
+			prevPage();
+			break;
+
+		default:
+			return;
+	}
+
+	e.preventDefault();
 });
