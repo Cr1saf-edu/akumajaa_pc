@@ -89,8 +89,12 @@ img {
   z-index: 0;
   margin: 2em auto;
   border: .5px solid var(--cg_co);
-  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 1px 5px rgba(190, 189, 189, 0.05);
   background: var(--cg_cl);
+  opacity: 0;
+  transform: rotateY(90deg);
+  transform-origin: right center;
+  transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
 }
 .page__wrapper {
   position: relative;
@@ -119,12 +123,16 @@ img {
   font-size: 20px;
   margin-top: -3px;
 }
-.page .controls .js-next, .page .controls .js-prev, .page .controls .js-back-to-1 {
+.page .controls .js-next, .page .controls .js-prev, .page .controls .js-auto-transition, .page .controls .js-back-to-1 {
   cursor: pointer;
   display: none;
   margin-left: 15px;
   font-weight: 700;
   text-transform: none;
+}
+.page.active {
+  opacity: 1;
+  transform: rotateY(0deg);
 }
 @media (min-width: 900px) {
   .page {
@@ -153,7 +161,7 @@ img {
     opacity: 1;
     transform: translate(0, 0);
   }
-  .page .controls .js-next, .page .controls .js-prev, .page .controls .js-back-to-1 {
+  .page .controls .js-next, .page .controls .js-prev, .page .controls .js-auto-transition, .page .controls .js-back-to-1 {
     display: inline-block;
   }
   .page .controls .js-back-to-1 {
